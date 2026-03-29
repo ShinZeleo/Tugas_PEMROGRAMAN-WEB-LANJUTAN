@@ -1,58 +1,89 @@
-# FastAPI CRUD - GET Items API
 
-Project ini merupakan implementasi sederhana **RESTful API menggunakan FastAPI dan SQLAlchemy** untuk memenuhi tugas mata kuliah **Pemrograman Web Lanjutan**.
+# FastAPI Microservices - CRUD, JWT Auth, RBAC & Testing
 
-API ini menggunakan **database SQLite** dan menerapkan konsep **ORM (Object Relational Mapping)** serta **validasi data dengan Pydantic**.
+Project ini merupakan implementasi **RESTful API berbasis FastAPI** yang dikembangkan sebagai bagian dari tugas mata kuliah **Pemrograman Web Lanjutan**.
+
+Versi ini merupakan pengembangan dari project sebelumnya dengan penambahan:
+- Autentikasi menggunakan JWT
+- Role-Based Access Control (RBAC)
+- Operasi CRUD lengkap
+- Automated Testing menggunakan pytest
 
 ---
 
-## 📌 Fitur API
+## 🚀 Fitur Utama
 
-API ini menyediakan dua endpoint utama:
+### 🔐 Autentikasi (JWT)
+- Register user dan admin
+- Login dan generate access token
+- Proteksi endpoint menggunakan token
 
-| Method | Endpoint           | Deskripsi                          |
-| ------ | ------------------ | ---------------------------------- |
-| GET    | `/items/`          | Mengambil semua data item          |
-| GET    | `/items/{item_id}` | Mengambil data item berdasarkan ID |
+### 📦 CRUD Operasional (Item)
+| Method | Endpoint           | Deskripsi                |
+|--------|------------------|-------------------------|
+| POST   | `/items/`         | Membuat item            |
+| GET    | `/items/`         | Menampilkan semua item  |
+| PUT    | `/items/{id}`     | Update item             |
+| DELETE | `/items/{id}`     | Hapus item (admin only) |
+
+### 🛡️ RBAC (Role-Based Access Control)
+- User biasa tidak bisa delete data
+- Admin memiliki akses penuh
+
+### 🧪 Automated Testing (Pytest)
+- Pengujian autentikasi (register & login)
+- Pengujian CRUD lengkap
+- Pengujian RBAC (403 Forbidden)
+- Pengujian unauthorized (tanpa token)
 
 ---
 
 ## 🛠️ Teknologi yang Digunakan
 
-* **FastAPI** – Framework untuk membuat REST API
-* **SQLAlchemy** – ORM untuk menghubungkan Python dengan database
-* **SQLite** – Database ringan berbasis file
-* **Pydantic** – Validasi dan serialisasi data
-* **Uvicorn** – ASGI server untuk menjalankan FastAPI
+- **FastAPI** – Framework backend
+- **SQLAlchemy** – ORM database
+- **SQLite** – Database
+- **Pydantic** – Validasi data
+- **JWT (python-jose)** – Autentikasi
+- **Passlib (bcrypt)** – Hash password
+- **Pytest** – Automated testing
+- **Uvicorn** – ASGI server
 
 ---
 
 ## 📂 Struktur Project
 
 ```
-fastapi-crud
+
+Tugas_FastAPI-CRUD/
 │
-├── main.py        # Endpoint API
-├── models.py      # Model database (SQLAlchemy)
-├── schemas.py     # Schema validasi data (Pydantic)
-├── db.py    # Konfigurasi koneksi database
+├── app/
+│   ├── main.py        # Endpoint + Auth + RBAC
+│   ├── models.py      # Model database
+│   ├── schemas.py     # Schema Pydantic
+│   └── db.py          # Koneksi database
+│
+├── tests/
+│   └── test_main.py   # Test pytest
+│
+├── requirements.txt
 └── README.md
-```
+
+````
 
 ---
 
 ## ⚙️ Cara Menjalankan Project
 
 ### 1. Install Dependencies
-
 ```bash
-pip install fastapi uvicorn sqlalchemy
-```
+pip install -r requirements.txt
+````
 
 ### 2. Jalankan Server
 
 ```bash
-python -m uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 Server akan berjalan di:
@@ -65,30 +96,58 @@ http://127.0.0.1:8000
 
 ## 📄 Dokumentasi API
 
-FastAPI menyediakan dokumentasi otomatis menggunakan **Swagger UI**.
-
-Buka di browser:
+Swagger UI:
 
 ```
 http://127.0.0.1:8000/docs
 ```
 
-Di halaman tersebut kamu bisa langsung mencoba endpoint API.
+---
+
+## 🧪 Cara Menjalankan Testing
+
+```bash
+pytest -v
+```
+
+### Contoh Output:
+
+```
+8 passed
+```
 
 ---
 
 ## 🧠 Konsep yang Digunakan
 
-Project ini menerapkan beberapa konsep dasar dalam pengembangan backend:
+* RESTful API
+* Microservices Architecture
+* JWT Authentication
+* Role-Based Access Control (RBAC)
+* Object Relational Mapping (ORM)
+* Automated Testing (pytest)
 
-* **RESTful API**
-* **Object Relational Mapping (ORM)**
-* **Validasi data menggunakan Pydantic**
-* **Dependency Injection untuk database session**
-* **Dokumentasi API otomatis dengan Swagger**
+---
+
+## 📌 Kesimpulan
+
+Project ini berhasil mengimplementasikan sistem backend microservices dengan:
+
+* Autentikasi JWT
+* CRUD lengkap
+* RBAC
+* Testing otomatis
+
+Seluruh pengujian berhasil dijalankan dengan hasil:
+
+```
+8 passed
+```
 
 ---
 
 ## 👨‍💻 Author
 
-Project ini dibuat untuk tugas mata kuliah **Pemrograman Web Lanjutan**.
+Dibuat untuk tugas mata kuliah **Pemrograman Web Lanjutan**.
+
+
